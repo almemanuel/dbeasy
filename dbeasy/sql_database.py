@@ -4,7 +4,7 @@ import pymssql
 from pymssql import Error
 
 
-class SQLDataBase():
+class SqlDatabase():
     def __init__(self, host: str, base: str, usr: str, password: str):
         self.host = host
         self.base = base
