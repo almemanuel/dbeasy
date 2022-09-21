@@ -1,5 +1,3 @@
-# RM 11:36
-
 import pymssql
 from pymssql import Error
 
@@ -95,4 +93,3 @@ class SqlDatabase():
         for row in self.last_response:
             result.append(row[0])
         return result
-# RM 11:36
