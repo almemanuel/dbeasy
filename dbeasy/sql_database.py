@@ -3,8 +3,9 @@
 import pymssql
 from pymssql import Error
 
-class DataBase():
-    def __init__(self, host:str, base:str, usr:str, password:str):
+
+class SQLDataBase():
+    def __init__(self, host: str, base: str, usr: str, password: str):
         self.host = host
         self.base = base
         self.usr = usr
@@ -19,12 +20,12 @@ class DataBase():
         Conecta com o banco de dados. Exibe o erro caso necessário
         """
         try:
-            self.conn = pymssql.connect(host=self.host, user=self.usr, password=self.passowrd, database=self.base)
+            self.conn = pymssql.connect(
+                host=self.host, user=self.usr, password=self.passowrd, database=self.base)
         except Error as ex:
             print(ex)
 
-
-    def execute_query(self, operation:str) -> None:
+    def execute_query(self, operation: str) -> None:
         """"
         Executa uma query, exibindo uma mensagem de sucesso ou erro na tela
         """
@@ -37,7 +38,7 @@ class DataBase():
         except Error as ex:
             print(ex)
 
-    def insert(self, table:str, fields:list, values:list) -> None:
+    def insert(self, table: str, fields: list, values: list) -> None:
         """
         Insere novas informações em uma tabela do banco de dados
         """
@@ -61,12 +62,11 @@ class DataBase():
                     continue
                 self.query += ")"
         else:
-            self.query =  f'INSERT INTO {table} ({fields}) VALUES ({values})'
+            self.query = f'INSERT INTO {table} ({fields}) VALUES ({values})'
 
         self.execute_query('insert')
 
-
-    def select(self, table:str, fields:list[str], conditions:list[list[str]] = [], groupby:str = '') -> None:
+    def select(self, table: str, fields: list[str], conditions: list[list[str]] = [], groupby: str = '') -> None:
         """
         Insere novas informações em uma tabela do banco de dados
         """
@@ -86,8 +86,7 @@ class DataBase():
 
         self.execute_query('select')
 
-
-    def get_column_name(self, table:str):
+    def get_column_name(self, table: str):
         self.query = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table}'"
         self.execute_query('select')
 
